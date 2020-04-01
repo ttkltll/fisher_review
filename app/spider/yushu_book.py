@@ -1,3 +1,5 @@
+from flask import current_app
+
 from app.libs.httper import HTTP
 
 __author__ = '谭亮'
@@ -17,7 +19,8 @@ class YuShuBook:
         return result
 
     @classmethod
-    def search_by_keyword(cls, keyword, count=15, start=0):
-        url = cls.keyword_url.format(keyword, count, start)
+    def search_by_keyword(cls, keyword, page=1):
+        start = (page-1)*current_app.config['PER_PAGE']+1
+        url = cls.keyword_url.format(keyword, current_app.config['PER_PAGE'], start)
         result = HTTP.get(url)
         return result
