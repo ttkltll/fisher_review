@@ -3,6 +3,7 @@ import json
 from flask import jsonify, request, current_app
 
 from app.forms.book import SearchForm
+from app.view_models.book import BookViewModel
 from app.web import web
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -18,7 +19,7 @@ from app.spider.yushu_book import YuShuBook
 #        self.summary = book['summary']
 
 #class BookViewModel(object):
-#    def __init__(self, result, q):
+#    def __init__(self, data, q):
 #        self.books = []
 #        self.total = len(self.books)
 #        # keywords 从哪来呢
@@ -30,6 +31,8 @@ from app.spider.yushu_book import YuShuBook
 #            return Book(book) for book in result.books
 #        else:
 #            return Book(book) for book in result
+
+
 
 
 @web.route('/book/search/')
@@ -48,8 +51,10 @@ def search():
         isbn_or_key = is_isbn_or_key(q)
         if isbn_or_key == 'isbn':
             result = YuShuBook.search_by_isbn(q, page)
+            result = BookViewModel.package_single(result, q)
         else:
             result = YuShuBook.search_by_keyword(q, page)
+            result = BookViewModel.package_collection(result, q)
         #result = BookViewModel(result)
         #return jsonify(result)
         return json.dumps(result), 200, {'content-type': 'application/json'}
