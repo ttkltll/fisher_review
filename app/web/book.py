@@ -9,32 +9,6 @@ from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 
 
-#class Book(object):
-#    def __init__(self, book):
-#        self.title = book['title']
-#        self.publisher = book['publisheri']
-#        self.pages = book['pages']
-#        self.author= book['authoor']
-#        self.price = book['price']
-#        self.summary = book['summary']
-
-#class BookViewModel(object):
-#    def __init__(self, data, q):
-#        self.books = []
-#        self.total = len(self.books)
-#        # keywords 从哪来呢
-#        self.keywords =q
-#        self.append(result)
-#
-#    def append(self, result):
-#        if result.total:
-#            return Book(book) for book in result.books
-#        else:
-#            return Book(book) for book in result
-
-
-
-
 @web.route('/book/search/')
 def search():
     """
@@ -51,10 +25,10 @@ def search():
         isbn_or_key = is_isbn_or_key(q)
         if isbn_or_key == 'isbn':
             result = YuShuBook.search_by_isbn(q, page)
-            result = BookViewModel.package_single(result, q)
+            result = BookViewModel(result, q)
         else:
             result = YuShuBook.search_by_keyword(q, page)
-            result = BookViewModel.package_collection(result, q)
+            result = BookViewModel(result, q)
         #result = BookViewModel(result)
         #return jsonify(result)
         return json.dumps(result), 200, {'content-type': 'application/json'}
