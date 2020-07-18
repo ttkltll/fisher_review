@@ -41,6 +41,7 @@ def search():
         return json.dumps(books, default=lambda o: o.__dict__)
     else:
         return jsonify(form.errors)
+        return
 
 
 @web.route('/')
