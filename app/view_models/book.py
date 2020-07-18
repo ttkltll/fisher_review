@@ -80,6 +80,16 @@ class BookViewModel:
         self.isbn = book['isbn']
         self.pages = book['pages']
 
+    @property
+    def intro(self):
+        #return self.title + '/' + self.publisher + '/ $' + self.price
+    # 这种处理不好，如果self.publisher没有数据，就变成中间两条//,
+        intros = filter(lambda x: True if x else False,
+                        [self.author, self.publisher, self.price])
+        return '/'.join(intros)
+        # 怎么加上符号呢？
+
+
 
 class BookCollection:
     def __init__(self):
