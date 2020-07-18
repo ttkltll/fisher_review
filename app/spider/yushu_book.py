@@ -6,8 +6,8 @@ __author__ = '谭亮'
 
 class YuShuBook:
     # 模型层 MVC M层
-    isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
-    keyword_url = 'http://t.yushu.im/v2/book/search?q={}&count={}&start={}'
+    isbn_url = 'http://t.talelin.com/v2/book/isbn/{}'
+    keyword_url = 'http://t.talelin.com/v2/book/search?q={}&count={}&start={}'
 
     def __init__(self):
         self.total = 0

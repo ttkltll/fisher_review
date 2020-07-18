@@ -40,33 +40,55 @@
 #
 #        return book
 #
-class Book(object):
+#class Book(object):
+#    def __init__(self, book):
+#        self.title = book['title']
+#        self.publisher = book['publisher']
+#        self.pages = book['pages']
+#        self.author= ','.join(book['author'])
+#        self.price = book['price']
+#        self.summary = book['summary']
+#
+#class BookViewModel(object):
+#    def __init__(self, data, q):
+#        self.books = []
+#        # keywords 从哪来呢
+#        self.keywords =q
+#        self.append(data)
+#        self.total = len(self.books)
+#
+#    def append(self,data):
+#        self.books = self.package(data)
+#
+#
+#    def package(self, result):
+#        if result['count']:
+#            return [Book(book) for book in result['books']]
+#        else:
+#            return [Book(result)]
+
+
+
+class BookViewModel:
     def __init__(self, book):
         self.title = book['title']
         self.publisher = book['publisher']
-        self.pages = book['pages']
-        self.author= ','.join(book['author'])
+        self.author = '、'.join(book['author'])
+        self.image = book['image']
         self.price = book['price']
         self.summary = book['summary']
+        self.isbn = book['isbn']
+        self.pages = book['pages']
 
-class BookViewModel(object):
-    def __init__(self, data, q):
+
+class BookCollection:
+    def __init__(self):
+        self.total = 0
         self.books = []
-        # keywords 从哪来呢
-        self.keywords =q
-        self.append(data)
-        self.total = len(self.books)
+        self.keyword = ''
 
-    def append(self,data):
-        self.books = self.package(data)
-
-
-    def package(self, result):
-        if result['count']:
-            return [Book(book) for book in result['books']]
-        else:
-            return [Book(result)]
-
-
-
+    def fill(self, yushu_book, keyword):
+        self.total = yushu_book.total
+        self.keyword = keyword
+        self.books = [BookViewModel(book) for book in yushu_book.books]
 
