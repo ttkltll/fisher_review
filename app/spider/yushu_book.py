@@ -36,6 +36,10 @@ class YuShuBook:
     def calculate_start(self, page):
         return (page - 1) * current_app.config['PER_PAGE']
 
+    @property
+    def first(self):
+        return self.books[0] if self.total >=1 else None
+
 
 
 ### 我写的问题在哪：1package 没有加__,这个方法显然是私有的，不用让外面知道。2dict.books,改成：dict['books'],3self.list = dict['books']就可以了
