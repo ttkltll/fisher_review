@@ -1,7 +1,8 @@
-
 from flask import Flask
 from flask_login import LoginManager
 from app.models.book import db
+from flask_mail import Mail
+from flask_cache import Cache
 
 
 login_manager = LoginManager()
@@ -14,6 +15,7 @@ def creat_app():
 
     db.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'web.login'  # 这个代码是告诉login_manager,到时发现没有current_user,没登录，应该跳到哪个视图函数。
     with app.app_context():
         db.create_all()
     return app
