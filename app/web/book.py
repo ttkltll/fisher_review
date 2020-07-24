@@ -9,6 +9,7 @@ from app.models.gift import Gift
 from app.models.user import User
 from app.models.wish import Wish
 from app.view_models.book import BookViewModel, BookCollection
+from app.view_models.trade import TradeInfo
 from app.web import web
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -81,7 +82,7 @@ def book_detail(isbn):
     trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
     # 如何把查询到的这本书的所有wish对象列表，转换成模板需要的？
 
-    wishes = Wishesinfo(trade_wishes)
+    wishes = TradeInfo(trade_wishes)
     return render_template('book_detail.html', book=book,wishes=wishes, gifts=[], wish=[],has_in_wishes=has_in_wishes, has_in_gifts=has_in_gifts)
 
 

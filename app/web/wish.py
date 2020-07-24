@@ -10,6 +10,9 @@ from . import web
 @web.route('/my/wish')
 def my_wish():
     #传入一个uid，就可以得到一个wish列表，只不过，如果转化成书呢，得到的列表，
+    pass
+
+
 @web.route('/wish/book/<isbn>')
 @login_required
 def save_to_wish(isbn):

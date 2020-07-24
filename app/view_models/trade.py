@@ -1,15 +1,30 @@
-class Trade():
-    def __init__(self, wish):
-        self.user_name = wish.user.user_name
-        self.time = wish.create_time
-        self.id = wish.id
 
-class Wishesinfo():
-    def __init__(self,data):
+
+from app.view_models.book import BookViewModel
+
+__author__ = '七月'
+
+
+# GiftOrWish
+class TradeInfo:
+    def __init__(self, goods):
         self.total = 0
         self.trades = []
-        self._convert(data)
+        self.__parse(goods)
 
-    def _convert(self, data):
-        self.total = len(data)
-        self.trades = [Trade(x) for x in data]
+    def __parse(self, goods):
+        self.total = len(goods)
+        self.trades = [self.__map_to_trade(single) for single in goods]
+
+    def __map_to_trade(self, single):
+        if single.create_datetime:
+            time = single.create_datetime.strftime('%Y-%m-%d')
+        else:
+            time = '未知'
+        return dict(
+            user_name=single.user.nickname,
+            time=time,
+            id=single.id
+        )
+
+
