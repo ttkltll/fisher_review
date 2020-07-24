@@ -23,3 +23,4 @@ class Book(Base):
 
     def sample(self):
         pass
+

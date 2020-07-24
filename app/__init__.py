@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
 from app.models.book import db
-from flask_mail import Mail
-from flask_cache import Cache
 
 
 login_manager = LoginManager()

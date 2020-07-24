@@ -1,3 +1,4 @@
 DEBUG = True
 
 SECRET_KEY = "iECgbYWReMNxkRprrzMo5KAQYnb2UeZ3bwvReTSt+VSESW0OB8zbglT+6rEcDW9X"
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:999999@127.0.0.1:3306/fisher"
