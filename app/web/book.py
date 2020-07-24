@@ -9,7 +9,6 @@ from app.models.gift import Gift
 from app.models.user import User
 from app.models.wish import Wish
 from app.view_models.book import BookViewModel, BookCollection
-from app.view_models.trade import Wishesinfo
 from app.web import web
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
