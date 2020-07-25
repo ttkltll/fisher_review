@@ -1,4 +1,3 @@
-
 import json
 
 from flask import jsonify, request, current_app, make_response, flash, render_template
@@ -9,7 +8,7 @@ from app.models.gift import Gift
 from app.models.user import User
 from app.models.wish import Wish
 from app.view_models.book import BookViewModel, BookCollection
-from app.view_models.trade import TradeInfo
+from app.view_models.trade import  TradeInfo
 from app.web import web
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -80,10 +79,16 @@ def book_detail(isbn):
 
     trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
     trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
-    # 如何把查询到的这本书的所有wish对象列表，转换成模板需要的？
 
-    wishes = TradeInfo(trade_wishes)
-    return render_template('book_detail.html', book=book,wishes=wishes, gifts=[], wish=[],has_in_wishes=has_in_wishes, has_in_gifts=has_in_gifts)
+    trade_wishes_model = TradeInfo(trade_wishes)
+    trade_gifts_model = TradeInfo(trade_gifts)
+
+    return render_template('book_detail.html',
+                           book=book, wishes=trade_wishes_model,
+                           gifts=trade_gifts_model, has_in_wishes=has_in_wishes,
+                           has_in_gifts=has_in_gifts)
+
+
 
 
 

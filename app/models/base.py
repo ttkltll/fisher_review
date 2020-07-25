@@ -1,4 +1,7 @@
+
 from datetime import datetime
+
+__author__ = '七月'
 
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 from sqlalchemy import Column, Integer, SmallInteger
@@ -25,6 +28,7 @@ class Query(BaseQuery):
 
 db = SQLAlchemy(query_class=Query)
 
+
 class Base(db.Model):
     __abstract__ = True
     create_time = Column('create_time', Integer)
@@ -47,4 +51,3 @@ class Base(db.Model):
             return datetime.fromtimestamp(self.create_time)
         else:
             return None
-
