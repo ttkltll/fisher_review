@@ -27,4 +27,13 @@ class TradeInfo:
             id=single.id
         )
 
+class MyTrades():
+    def __init__(self, lists_mine, count_list):
+        self.trades = []
+        self._map(lists_mine, count_list )
+
+    def _map(self, lists_mine, count_list ):
+        self.trades = [for x in lists_mine]
+        # 写到这，我不知道怎么写，这里看似要用两个列表推导式组合成一个。
+
 

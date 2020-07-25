@@ -1,5 +1,5 @@
-from math import floor
 
+from math import floor
 from app.models.base import db, Base
 from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,6 +12,8 @@ from app.libs.helper import is_isbn_or_key
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
+
+
 
 class User(UserMixin, Base):
     # __tablename__ = 'user1'
@@ -59,13 +61,16 @@ class User(UserMixin, Base):
         else:
             return False
 
-    def has_in_gift(self, isbn):
-        gift = Gift.query.filter_by(uid=self.id, isbn=isbn,
-                                       launched=False).first()
+    @property
+    def summary(self):
+        return dict(
+            nickname=self.nickname,
+            beans=self.beans,
+            email=self.email,
+            send_receive=str(self.send_counter) + '/' + str(self.receive_counter)
+        )
 
-    def has_in_wish(self, isbn):
-        wish = Wish.query.filter_by(uid=self.id, isbn=isbn,
-                                              launched=False).first()
+
 @login_manager.user_loader
 def get_user(uid):
     return User.query.get(int(uid))
