@@ -1,5 +1,5 @@
 
-from flask import session, make_response, json, request, current_app, flash, redirect, url_for
+from flask import session, make_response, json, request, current_app, flash, redirect, url_for, render_template
 from flask_login import login_required, current_user
 
 from app.models.base import db
@@ -10,8 +10,8 @@ from . import web
 @web.route('/my/gifts')
 @login_required
 def my_gifts():
-    return 'My Gifts'
-
+    my_gifts = Gift.query.filter_by(uid=current_user.id, launched=False).all()
+    return render_template('my_gifts.html', gifts=my_gifts)
 
 @web.route('/gifts/book/<isbn>')
 @login_required

@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 from flask import current_app
 from collections import namedtuple
 
+from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 
 
@@ -29,3 +30,8 @@ class Gift(Base):
     def recent(cls):
         recent_gift = Gift.query.filter_by(launched=False).group_by(Gift.isbn).limit(current_app.config['RECENT_BOOK_COUNT']).distinct().all()
         return recent_gift
+
+    @property
+    def wishes_count(self):
+        #这个函数，返回一本书有多少个人要，拿到isbn,去Wishes里找：
+        return Wish.query.filter_by(isbn=Gift.isbn).count()

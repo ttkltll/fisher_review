@@ -2,7 +2,7 @@
 <html>
 
 {% block title %}
-    <title>鱼书</title>
+    <title>sBook</title>
 {% endblock %}
 
 {% block head %}
@@ -26,7 +26,7 @@
                         <input name="q" type="text" placeholder="ISBN、图书名称"
                                class="form-control input-sm">
                         <span class="input-group-btn">
-                            <input class="btn btn-search" type="submit" value="搜索"/>
+                            <input class="btn btn-search" type="submit" value="search"/>
                         </span>
                     </div>
                 </div>
@@ -40,28 +40,28 @@
                     <a id="recent" href="{{ url_for('web.index') }}"
                        class="flex-vertical-hor-center">
                         <img src="{{ url_for('static', filename='images/upload.png') }}"/>
-                        <span>最近上传</span>
+                        <span>recent-gift</span>
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a id="gifts" href="{{ url_for('web.my_gifts') }}"
                        class="flex-vertical-hor-center">
                         <img src="{{ url_for('static', filename='images/gift.png') }}"/>
-                        <span>赠送清单</span>
+                        <span>my_gift</span>
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a id="wishes" href="{{ url_for('web.my_wish') }}"
                        class="flex-vertical-hor-center">
                         <img src="{{ url_for('static', filename='images/wish.png') }}"/>
-                        <span>心愿清单</span>
+                        <span>my_wish</span>
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a id="pending" href="{{ url_for('web.pending') }}"
                        class="flex-vertical-hor-center">
                         <img src="{{ url_for('static', filename='images/fish.png') }}"/>
-                        <span>鱼漂</span>
+                        <span>book-on</span>
                     </a>
                 </div>
             </div>
@@ -70,12 +70,12 @@
     <div class="container-height flex-vertical-center float-menu">
         {% if not current_user.is_authenticated %}
             <div style="float:right">
-                <a href="{{ url_for('web.login') }}">登录</a>
-                <a style="margin-left: 40px;" href="{{ url_for('web.register') }}">注册</a>
+                <a href="{{ url_for('web.login') }}">login</a>
+                <a style="margin-left: 40px;" href="{{ url_for('web.register') }}">register</a>
             </div>
         {% else %}
-            <a href="{{ url_for('web.personal_center') }}">{{ current_user.nickname }}的鱼书</a>
-            <a style="margin-left: 40px;" href="{{ url_for('web.logout') }}">注销</a>
+            <a href="{{ url_for('web.personal_center') }}">{{ current_user.nickname }}'s account</a>
+            <a style="margin-left: 40px;" href="{{ url_for('web.logout') }}">logout</a>
         {% endif %}
     </div>
 {% endblock %}
@@ -97,7 +97,6 @@
     {% block content %} {% endblock %}
 </div>
 <div id="footer" class="flex-hor-center">
-    <span>© 2017-2020 yushu.im created by 七月</span>
 </div>
 </body>
 
