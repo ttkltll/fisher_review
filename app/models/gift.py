@@ -5,8 +5,7 @@ from flask import current_app
 from collections import namedtuple
 
 from app.spider.yushu_book import YuShuBook
-
-
+from app.view_models.book import BookViewModel
 
 
 class Gift(Base):
@@ -17,3 +16,10 @@ class Gift(Base):
     # book = relationship('Book')
     # bid = Column(Integer, ForeignKey('user.id'))
     launched = Column(Boolean, default=False)
+
+    @property
+    def book(self):
+        yushubook = YuShuBook
+        yushubook.search_by_isbn(self.isbn)
+        return BookViewModel(yushubook.first)
+
