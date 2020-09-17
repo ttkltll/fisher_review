@@ -56,3 +56,45 @@ class MyTrades:
             'id': trade.id
         }
         return r
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""  
+class MyTrades():
+    def __init__(self, gifts_of_mine, wishes_count_list):
+        self.trades = []
+        self.trades = self._map()
+        self.__gifts_of_mine = gifts_of_mine
+        self.__wishes_count_list = wishes_count_list
+    def _map(self):
+        list = []
+
+        for wish in self.__gifts_of_mine:
+            r = {
+                'wishes_count': 0,
+                'book' : None
+
+            }
+            for trade in self.__wishes_count_list:
+                if trade['isbn'] == wish.isbn:
+                    r['wishes_count'] = trade['count']
+            r['book'] = wish.book
+            list.append(r)
+        return list
+        
+"""
+

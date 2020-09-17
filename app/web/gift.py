@@ -31,9 +31,6 @@ def my_gifts():
     view_model = MyTrades(gifts_of_mine, wish_count_list)
     return render_template('my_gifts.html', gifts=view_model.trades)
 
-
-
-
 @web.route('/gifts/book/<isbn>')
 @login_required
 def save_to_gifts(isbn):
